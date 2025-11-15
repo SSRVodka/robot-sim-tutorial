@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: bimanual_desc
+    relative_path: urdf/body.urdf
+  srdf:
+    relative_path: config/jaka_body.srdf
+  package_settings:
+    author_name: SSRVodka
+    author_email: xhwpro@gmail.com
+    generated_timestamp: 1755164663
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

@@ -1,0 +1,8 @@
+float32 target_x
+float32 target_y
+---
+int8 SUCCESS = 0
+int8 INVALID_ARGS = 1
+int8 INTERN_ERROR = 2
+int8 code
+string msg

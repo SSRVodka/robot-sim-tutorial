@@ -1,0 +1,107 @@
+<mujoco model="voxelsky_robot">
+  <default>
+    <default class="robot">
+      <default class="motor">
+        <joint />
+        <motor />
+      </default>
+      <default class="visual">
+        <geom material="visualgeom" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom material="collision_material" condim="3" contype="0" conaffinity="1" priority="1" group="1" solref="0.005 1" friction="1 0.01 0.01" />
+        <equality solimp="0.99 0.999 1e-05" solref="0.005 1" />
+      </default>
+    </default>
+  </default>
+
+  <compiler angle="radian" />
+
+  <asset>
+    <material name="blue" rgba="0.1 0.1 1.0 0.5" />
+    <material name="black" rgba="0.0 0.0 0.0 0.8" />
+    <material name="default_material" rgba="0.7 0.7 0.7 1" />
+    <material name="collision_material" rgba="1.0 0.28 0.1 0.9" />
+  </asset>
+
+  <worldbody>
+    <body name="base_footprint" pos="0.00000000 0.00000000 0.00100000" quat="1 0 0 0" childclass="robot">
+      <freejoint name="floating_base" />
+      <body name="base_link" pos="0.0 0.0 0.091" quat="1.0 0.0 0.0 0.0">
+        <inertial mass="1.0" diaginertia="0.0037000000000000006 0.0037000000000000006 0.005000000000000001" />
+        <geom name="base_link_collision" pos="0 0 0.0" quat="1.0 0.0 0.0 0.0" type="cylinder" size="0.12 0.06" class="collision" />
+        <geom name="base_link_visual" pos="0 0 0.0" quat="1.0 0.0 0.0 0.0" material="blue" type="cylinder" size="0.12 0.06" class="visual" />
+        <body name="imu_link" pos="0 0 0.02" quat="1.0 0.0 0.0 0.0">
+          <inertial mass="0.01" diaginertia="6.666666666666667e-07 6.666666666666667e-07 6.666666666666667e-07" />
+          <geom name="imu_link_collision" pos="0 0 00" quat="1.0 0.0 0.0 0.0" type="box" size="0.01 0.01 0.01" class="collision" />
+          <geom name="imu_link_visual" pos="0 0 00" quat="1.0 0.0 0.0 0.0" material="black" type="box" size="0.01 0.01 0.01" class="visual" />
+        </body>
+        <body name="laser_cylinder_link" pos="0 0 0.10" quat="1.0 0.0 0.0 0.0">
+          <inertial mass="0.01" diaginertia="8.583333333333335e-06 8.583333333333335e-06 5.000000000000001e-07" />
+          <geom name="laser_cylinder_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="cylinder" size="0.01 0.05" class="collision" />
+          <geom name="laser_cylinder_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="black" type="cylinder" size="0.01 0.05" class="visual" />
+          <body name="laser_link" pos="0 0 0.05" quat="1.0 0.0 0.0 0.0">
+            <inertial mass="0.03" diaginertia="4e-06 4e-06 6e-06" />
+            <geom name="laser_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="cylinder" size="0.02 0.01" class="collision" />
+            <geom name="laser_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="black" type="cylinder" size="0.02 0.01" class="visual" />
+          </body>
+        </body>
+        <body name="camera_link" pos="0.10 0 0.075" quat="1.0 0.0 0.0 0.0">
+          <inertial mass="0.01" diaginertia="8.666666666666668e-06 6.666666666666667e-07 8.666666666666668e-06" />
+          <geom name="camera_link_collision" pos="0 0 0.0" quat="1.0 0.0 0.0 0.0" type="box" size="0.01 0.05 0.01" class="collision" />
+          <geom name="camera_link_visual" pos="0 0 0.0" quat="1.0 0.0 0.0 0.0" material="black" type="box" size="0.01 0.05 0.01" class="visual" />
+          <body name="camera_optical_link" pos="0 0 0" quat="0.5000000000000001 -0.5 0.4999999999999999 -0.5" />
+        </body>
+        <body name="left_wheel_link" pos="0 0.10 -0.06" quat="1.0 0.0 0.0 0.0">
+          <joint name="left_wheel_joint" type="hinge" ref="0.0" class="motor" axis="0 1 0" />
+          <inertial mass="0.1" diaginertia="3.8933333333333336e-05 3.8933333333333336e-05 5.12e-05" />
+          <geom name="left_wheel_link_collision" pos="0 0 0" quat="0.7071090180427968 0.7071045443232221 0.0 0.0" type="cylinder" size="0.032 0.02" class="collision" />
+          <geom name="left_wheel_link_visual" pos="0 0 0" quat="0.7071090180427968 0.7071045443232221 0.0 0.0" material="black" type="cylinder" size="0.032 0.02" class="visual" />
+        </body>
+        <body name="right_wheel_link" pos="0 -0.10 -0.06" quat="1.0 0.0 0.0 0.0">
+          <joint name="right_wheel_joint" type="hinge" ref="0.0" class="motor" axis="0 1 0" />
+          <inertial mass="0.1" diaginertia="3.8933333333333336e-05 3.8933333333333336e-05 5.12e-05" />
+          <geom name="right_wheel_link_collision" pos="0 0 0" quat="0.7071090180427968 0.7071045443232221 0.0 0.0" type="cylinder" size="0.032 0.02" class="collision" />
+          <geom name="right_wheel_link_visual" pos="0 0 0" quat="0.7071090180427968 0.7071045443232221 0.0 0.0" material="black" type="cylinder" size="0.032 0.02" class="visual" />
+        </body>
+        <body name="front_caster_link" pos="0.08 0.0 -0.076" quat="1.0 0.0 0.0 0.0">
+          <inertial mass="0.01" diaginertia="1.024e-06 1.024e-06 1.024e-06" />
+          <geom name="front_caster_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="sphere" size="0.016" class="collision" />
+          <geom name="front_caster_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="black" type="sphere" size="0.016" class="visual" />
+        </body>
+        <body name="back_caster_link" pos="-0.08 0.0 -0.076" quat="1.0 0.0 0.0 0.0">
+          <inertial mass="0.01" diaginertia="1.024e-06 1.024e-06 1.024e-06" />
+          <geom name="back_caster_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="sphere" size="0.016" class="collision" />
+          <geom name="back_caster_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="black" type="sphere" size="0.016" class="visual" />
+        </body>
+      </body>
+      <site name="base_footprint_site" pos="0 0 0" quat="1 0 0 0" />
+      <camera name="front_camera" mode="track" fovy="90.0" quat="4.329780281177467e-17 4.329780281177466e-17 0.7071067811865475 0.7071067811865476" pos="0.0 2.0 0.5" />
+      <camera name="side_camera" mode="track" fovy="90.0" quat="-0.5 -0.4999999999999999 0.5 0.5000000000000001" pos="-2.0 0.0 0.5" />
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="left_wheel_joint_ctrl" joint="left_wheel_joint" class="motor" />
+    <motor name="right_wheel_joint_ctrl" joint="right_wheel_joint" class="motor" />
+  </actuator>
+
+  <contact>
+    <exclude body1="base_link" body2="imu_link" />
+    <exclude body1="base_link" body2="laser_cylinder_link" />
+    <exclude body1="laser_cylinder_link" body2="laser_link" />
+    <exclude body1="base_link" body2="camera_link" />
+    <exclude body1="base_link" body2="left_wheel_link" />
+    <exclude body1="base_link" body2="right_wheel_link" />
+    <exclude body1="base_link" body2="front_caster_link" />
+    <exclude body1="base_link" body2="back_caster_link" />
+  </contact>
+
+  <sensor>
+    <framepos name="base_footprint_site_pos" objtype="site" objname="base_footprint_site" />
+    <framequat name="base_footprint_site_quat" objtype="site" objname="base_footprint_site" />
+    <framelinvel name="base_footprint_site_linvel" objtype="site" objname="base_footprint_site" />
+    <frameangvel name="base_footprint_site_angvel" objtype="site" objname="base_footprint_site" />
+    <velocimeter name="base_footprint_site_vel" site="base_footprint_site" />
+  </sensor>
+</mujoco>

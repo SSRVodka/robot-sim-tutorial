@@ -1,0 +1,18 @@
+Host ros
+    HostName 127.0.0.1
+        Port 22
+    User root
+        PreferredAuthentications password
+Host ros-humble
+    HostName 127.0.0.1
+        Port 10022
+    User root
+        PreferredAuthentications password
+Host ros-humble-no-ros
+    HostName 127.0.0.1
+        Port 10022
+    User root
+        PreferredAuthentications password
+    RemoteCommand bash --rcfile ~/.bashrc_no_ros
+    RequestTTY yes
+

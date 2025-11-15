@@ -1,0 +1,22 @@
+# ROS2 build files
+build/
+install/
+log/
+
+# Python virtual environment
+venv/
+.venv/
+env/
+.env/
+.pyenv/
+.pyvenv/
+
+# PyCharm debugger
+.pytest_cache/
+.vscode/
+.idea/
+.pytest_cache/
+.mypy_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+.pytest_cache

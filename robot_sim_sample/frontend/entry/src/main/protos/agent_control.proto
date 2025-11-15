@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package agent_control;
+
+message AgentCommand {
+    string command = 1;
+}
+
+message CommandResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service AgentControl {
+    // send & receive message
+    rpc SendPrompt(AgentCommand) returns (CommandResponse);
+}

@@ -1,0 +1,1 @@
+lab2_ros_svc/object_detector/resource/yolo11x.pt filter=lfs diff=lfs merge=lfs -text

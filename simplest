@@ -1,0 +1,2 @@
+ros2 launch servo2c servo_demo.launch.py
+python3 oh_servo/oh_servo/servo_grpc_server.py

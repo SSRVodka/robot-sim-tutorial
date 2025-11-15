@@ -1,0 +1,13 @@
+assets
+build
+build-jazzy
+install
+install-jazzy
+log
+*.log
+
+venv
+
+# training data
+/**/oh_agent/train/images
+/**/oh_agent/train/labels

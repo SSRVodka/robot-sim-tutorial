@@ -1,0 +1,8 @@
+sensor_msgs/Image image		# 原始图像数据
+---
+int16 number		    # 对象个数
+float32 consume_time	# 识别耗时
+int32[] top			    # 对象在图像中的像素坐标
+int32[] right
+int32[] bottom
+int32[] left

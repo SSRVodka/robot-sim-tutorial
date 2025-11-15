@@ -1,0 +1,17 @@
+# Default initial positions for jaka_body's ros2_control fake system
+
+initial_positions:
+  l-j1: 0
+  l-j2: 0
+  l-j3: 0
+  l-j4: 0
+  l-j5: 0
+  l-j6: 0
+  l-j7: 0
+  r-j1: 0
+  r-j2: 0
+  r-j3: 0
+  r-j4: 0
+  r-j5: 0
+  r-j6: 0
+  r-j7: 0

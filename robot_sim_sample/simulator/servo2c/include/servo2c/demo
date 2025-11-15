@@ -1,0 +1,88 @@
+// Create collision object for the container
+moveit_msgs::msg::CollisionObject container_collision_object;
+container_collision_object.header.frame_id = "world";  // Adjust frame_id as needed
+container_collision_object.id = "container";
+
+// Container body position from XML: pos="0.4 0.3 0.15"
+double container_x = 0.4;
+double container_y = 0.3;
+double container_z = 0.15;
+
+// 1. Base geometry: size="0.2 0.2 0.01" pos="0 0 -0.09"
+shape_msgs::msg::SolidPrimitive base;
+base.type = base.BOX;
+base.dimensions = {0.4, 0.4, 0.02};  // MuJoCo size is half-extents, MoveIt2 uses full dimensions
+geometry_msgs::msg::Pose base_pose;
+base_pose.position.x = container_x + 0.0;    // container_pos + local_pos
+base_pose.position.y = container_y + 0.0;
+base_pose.position.z = container_z + (-0.09);
+base_pose.orientation.w = 1.0;
+
+// 2. Front wall: size="0.2 0.025 0.1" pos="0 0.175 -0.09"
+shape_msgs::msg::SolidPrimitive front_wall;
+front_wall.type = front_wall.BOX;
+front_wall.dimensions = {0.4, 0.05, 0.2};
+geometry_msgs::msg::Pose front_wall_pose;
+front_wall_pose.position.x = container_x + 0.0;
+front_wall_pose.position.y = container_y + 0.175;
+front_wall_pose.position.z = container_z + (-0.09);
+front_wall_pose.orientation.w = 1.0;
+
+// 3. Back wall: size="0.2 0.025 0.1" pos="0 -0.175 -0.09"
+shape_msgs::msg::SolidPrimitive back_wall;
+back_wall.type = back_wall.BOX;
+back_wall.dimensions = {0.4, 0.05, 0.2};
+geometry_msgs::msg::Pose back_wall_pose;
+back_wall_pose.position.x = container_x + 0.0;
+back_wall_pose.position.y = container_y + (-0.175);
+back_wall_pose.position.z = container_z + (-0.09);
+back_wall_pose.orientation.w = 1.0;
+
+// 4. Left wall: size="0.025 0.2 0.1" pos="-0.175 0 -0.09"
+shape_msgs::msg::SolidPrimitive left_wall;
+left_wall.type = left_wall.BOX;
+left_wall.dimensions = {0.05, 0.4, 0.2};
+geometry_msgs::msg::Pose left_wall_pose;
+left_wall_pose.position.x = container_x + (-0.175);
+left_wall_pose.position.y = container_y + 0.0;
+left_wall_pose.position.z = container_z + (-0.09);
+left_wall_pose.orientation.w = 1.0;
+
+// 5. Right wall: size="0.025 0.2 0.1" pos="0.175 0 -0.09"
+shape_msgs::msg::SolidPrimitive right_wall;
+right_wall.type = right_wall.BOX;
+right_wall.dimensions = {0.05, 0.4, 0.2};
+geometry_msgs::msg::Pose right_wall_pose;
+right_wall_pose.position.x = container_x + 0.175;
+right_wall_pose.position.y = container_y + 0.0;
+right_wall_pose.position.z = container_z + (-0.09);
+right_wall_pose.orientation.w = 1.0;
+
+moveit_msgs::msg::CollisionObject base_obj, front_obj, back_obj, left_obj, right_obj;
+// Base object
+base_obj.header.frame_id = "world";
+base_obj.id = "container_base";
+base_obj.primitives.push_back(base);
+base_obj.primitive_poses.push_back(base_pose);
+base_obj.operation = base_obj.ADD;
+// Front wall object
+front_obj.header.frame_id = "world";
+front_obj.id = "container_front";
+front_obj.primitives.push_back(front_wall);
+front_obj.primitive_poses.push_back(front_wall_pose);
+front_obj.operation = front_obj.ADD;
+back_obj.header.frame_id = "world";
+back_obj.id = "container_back";
+back_obj.primitives.push_back(back_wall);
+back_obj.primitive_poses.push_back(back_wall_pose);
+back_obj.operation = back_obj.ADD;
+left_obj.header.frame_id = "world";
+left_obj.id = "container_left";
+left_obj.primitives.push_back(left_wall);
+left_obj.primitive_poses.push_back(left_wall_pose);
+left_obj.operation = left_obj.ADD;
+right_obj.header.frame_id = "world";
+right_obj.id = "container_right";
+right_obj.primitives.push_back(right_wall);
+right_obj.primitive_poses.push_back(right_wall_pose);
+right_obj.operation = right_obj.ADD;

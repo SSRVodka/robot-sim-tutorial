@@ -1,0 +1,6 @@
+{
+  "src": [
+    "pages/JoystickPage",
+    "pages/ChatPage"
+  ]
+}
